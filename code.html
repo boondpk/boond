@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            background-color: #091325;
+            color: #d9e2fb;
+            font-family: 'Manrope', sans-serif;
+            overflow-x: hidden;
+        }
+        .font-headline-md { font-family: 'EB Garamond', serif; }
+        .font-display-lg { font-family: 'EB Garamond', serif; }
+        .font-headline-lg { font-family: 'EB Garamond', serif; }
+        .font-label-sm { font-family: 'Manrope', sans-serif; }
+        .font-body-md { font-family: 'Manrope', sans-serif; }
+        .font-body-lg { font-family: 'Manrope', sans-serif; }
+
+        .glass-card {
+            backdrop-filter: blur(24px);
+            background: rgba(10, 22, 40, 0.7);
+            border-top: 1px solid rgba(201, 168, 76, 0.3);
+            border-left: 1px solid rgba(201, 168, 76, 0.1);
+        }
+        .gold-glow {
+            text-shadow: 0 0 20px rgba(201, 168, 76, 0.5);
+        }
+        .ripple-bg {
+            background: radial-gradient(circle at center, rgba(187, 199, 223, 0.05) 0%, transparent 70%);
+        }
+        .gold-thread {
+            height: 0.5px;
+            background: linear-gradient(90deg, transparent, #c9a84c, transparent);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                "outline-variant": "#45474c",
+                "secondary-fixed": "#ffe08f",
+                "primary": "#bbc7df",
+                "on-surface-variant": "#c5c6cd",
+                "on-secondary": "#3d2e00",
+                "tertiary-container": "#141616",
+                "inverse-on-surface": "#273143",
+                "outline": "#8f9097",
+                "on-primary": "#253144",
+                "on-error-container": "#ffdad6",
+                "on-primary-fixed": "#101c2e",
+                "tertiary-fixed-dim": "#c6c6c7",
+                "on-secondary-fixed-variant": "#584400",
+                "surface-variant": "#2b3548",
+                "inverse-primary": "#535f74",
+                "on-tertiary-fixed-variant": "#454747",
+                "surface-container-low": "#111c2d",
+                "on-primary-container": "#758096",
+                "secondary-fixed-dim": "#e6c364",
+                "secondary": "#e6c364",
+                "on-primary-fixed-variant": "#3c475b",
+                "on-secondary-fixed": "#241a00",
+                "surface-container-lowest": "#040e1f",
+                "surface-tint": "#bbc7df",
+                "secondary-container": "#785d00",
+                "surface-container-high": "#202a3c",
+                "on-background": "#d9e2fb",
+                "on-surface": "#d9e2fb",
+                "primary-fixed-dim": "#bbc7df",
+                "primary-fixed": "#d7e3fc",
+                "inverse-surface": "#d9e2fb",
+                "tertiary": "#c6c6c7",
+                "surface": "#091325",
+                "error": "#ffb4ab",
+                "surface-container": "#162031",
+                "surface-bright": "#2f394c",
+                "on-tertiary-container": "#7e8080",
+                "on-secondary-container": "#fdd977",
+                "background": "#091325",
+                "on-tertiary-fixed": "#1a1c1c",
+                "primary-container": "#0a1628",
+                "surface-container-highest": "#2b3548",
+                "surface-dim": "#091325",
+                "error-container": "#93000a",
+                "on-tertiary": "#2f3131",
+                "on-error": "#690005",
+                "tertiary-fixed": "#e2e2e2"
+              },
+              "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+              },
+              "spacing": {
+                "margin-desktop": "80px",
+                "section-gap": "120px",
+                "margin-mobile": "20px",
+                "container-max": "1280px",
+                "gutter": "24px",
+                "unit": "8px"
+              },
+              "fontFamily": {
+                "headline-md": ["EB Garamond"],
+                "display-lg": ["EB Garamond"],
+                "body-lg": ["Manrope"],
+                "headline-lg": ["EB Garamond"],
+                "label-sm": ["Manrope"],
+                "headline-lg-mobile": ["EB Garamond"],
+                "body-md": ["Manrope"]
+              },
+              "fontSize": {
+                "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "400"}],
+                "display-lg": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "500"}],
+                "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                "headline-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                "headline-lg-mobile": ["36px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+              }
+            }
+          }
+        }
+    </script>
+</head>
+<body class="bg-background selection:bg-secondary/30">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/70 backdrop-blur-3xl border-b border-secondary/20 shadow-2xl">
+<div class="flex justify-between items-center px-margin-desktop py-6 max-w-container-max mx-auto">
+<div class="font-headline-lg text-headline-lg tracking-widest text-on-surface">BOOND</div>
+<div class="hidden md:flex items-center gap-gutter">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary-fixed transition-colors duration-300" href="#">Shop</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary-fixed transition-colors duration-300" href="#">Customizer</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary-fixed transition-colors duration-300" href="#">Order Tracking</a>
+</div>
+<button class="bg-transparent border border-secondary text-secondary font-label-sm text-label-sm px-6 py-2 hover:bg-secondary/10 active:scale-95 transition-all duration-200">
+                Order Now
+            </button>
+</div>
+</nav>
+<!-- Hero Section -->
+<section class="relative h-screen w-full flex items-center justify-center overflow-hidden">
+<!-- Cinematic Background -->
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-40 mix-blend-luminosity" data-alt="A cinematic, ultra-high-definition background featuring a massive, artistic water splash frozen in time. The water is crystalline and translucent, catching light like fine diamonds. The environment is a deep navy midnight studio, with soft gold backlighting creating a halo around the droplets. The mood is luxurious, serene, and incredibly sharp." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCv52sD-oKGzmr-7_ednUWtbL_5tVtX7pglIAU9FL9JpPfPcXqPosSX42tYNOT2_zcXdcw7DU2fo8wd13wdINgssheeXw6MLobB6yGWF6quJL0evmD5BRGZZhchjOHOZlpkWziuFVV0oG_3hdCqbXLdM6xvlZqBMtJAlqq5QqOlZIXLaerQ-oMTugnH4B8n5NPdLbGyim6Luvtk3Z2pJ0yustwh1qEZw74RhAZS6rqYzPBbp181t742rTEm72IYVKz3vLWujgVbpx8"/>
+<div class="absolute inset-0 bg-gradient-to-b from-surface/80 via-transparent to-surface"></div>
+</div>
+<!-- Hero Content -->
+<div class="relative z-10 flex flex-col items-center text-center px-margin-mobile md:px-0">
+<!-- Center Logo -->
+<div class="mb-12">
+<h1 class="font-display-lg text-display-lg text-on-surface gold-glow tracking-widest mb-2">BOOND (بوند)</h1>
+<div class="gold-thread w-32 mx-auto"></div>
+</div>
+<!-- Floating Bottle Centerpiece -->
+<div class="relative w-64 h-[450px] md:w-80 md:h-[550px] mb-8 group">
+<!-- Glowing Halo -->
+<div class="absolute inset-0 bg-secondary/10 blur-[100px] rounded-full scale-150 pointer-events-none"></div>
+<img class="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)] transition-transform duration-700 hover:scale-105" data-alt="A premium glass water bottle with a minimalist, high-end label featuring the word BOOND in gold calligraphy. The bottle is perfectly clear, reflecting the dark navy and gold studio lighting. Tiny condensation droplets cling to the surface of the glass. The bottle appears to float weightlessly against a dark, moody background with subtle atmospheric dust motes." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXpkSlC1B9yvDhLUGzzTxq5L5CJVY-XKySj-nCffR5wdXaKImmH61rSmGSe6Q4oenskEDloO9Vh39G0HPJu0fnhVJxK_gU0cBn8Vt7mVTPrpVXEKAW7tCC7bhUiWhXdTLhSeZl9YZ1_NKasrdq-QchzYOJuCvy_HwHTJ8ALgnZxdLdltTaMkL8h4PgNiIG_PkHrBN9IYKpSwgYjir4OJXAhVsC0XQUB_CKmt4nMD5HNjGJ4T5P77xtQU1LCO22u_PUqNCLfJFY28Y"/>
+</div>
+<!-- Tagline -->
+<p class="font-headline-md text-headline-md text-primary max-w-2xl mx-auto mb-10 italic">
+                Where Freshness Meets Excellence
+            </p>
+<!-- CTA -->
+<div class="flex flex-col md:flex-row gap-6 items-center">
+<button class="px-10 py-4 border border-secondary text-on-surface font-label-sm text-label-sm uppercase tracking-widest bg-transparent hover:bg-secondary/10 hover:shadow-[0_0_20px_rgba(201,168,76,0.2)] transition-all duration-300">
+                    Discover The Source
+                </button>
+<button class="px-10 py-4 bg-secondary text-on-secondary font-label-sm text-label-sm uppercase tracking-widest hover:brightness-110 active:scale-95 transition-all duration-300">
+                    Order Now
+                </button>
+</div>
+</div>
+</section>
+<!-- Bento Grid Showcase -->
+<section class="py-section-gap px-margin-desktop max-w-container-max mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Bento Card 1: Large Feature -->
+<div class="md:col-span-8 h-[500px] glass-card p-10 flex flex-col justify-end relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-8">
+<span class="material-symbols-outlined text-secondary text-5xl" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+<img class="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-110 transition-transform duration-1000" data-alt="A breathtaking view of the Karakoram mountain range at twilight. The jagged peaks are covered in pristine white snow, glowing softly under a deep blue sky. A thin mist rolls through the valleys below. The image is filtered with a cool, cinematic navy tone to match the luxury dark-mode brand aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgsRKIQ11-S8vDw8rOgqzpz2oW6sdG8y33pk55Gad4t13aMZwknrRnwyYRxYtMRUiC6C-tADE5N_o5LxdclL9bjNUjvCPWya93LXlVrnBgVncP0srqDsRqfrXo-ZrcIOU2DooguzfygUVhRsVFQ4Gj4WplDtqVAmdFGCobLJ82IhOfvOSl1m5BVVhsxx14oOgaMjQrS9dt0X9O3NAhZy9-gesQ_yBAf5tkBHk9dmi4xAT7x4ZTDnIlmsu4ZaDTJUFuV9DW3HmI1hc"/>
+<div class="relative z-10">
+<h3 class="font-headline-lg text-headline-lg text-on-surface mb-4">Ancestral Pakistani Origins</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+                        Sourced from the heart of the Karakoram, each drop tells a story of thousand-year-old glaciers and the purity of untouched nature.
+                    </p>
+</div>
+</div>
+<!-- Bento Card 2: Small Feature -->
+<div class="md:col-span-4 h-[500px] glass-card p-10 flex flex-col justify-between border-secondary/20">
+<div class="w-full aspect-square bg-surface-container rounded-full overflow-hidden flex items-center justify-center border border-secondary/10 mb-6">
+<img class="w-full h-full object-cover opacity-60" data-alt="Macro photography of a single water ripple expanding across a dark, reflective surface. The light catches the crest of the ripple in a shimmering gold highlight. The composition is centered and minimalist, evoking a sense of calm and rhythmic expansion. High contrast between the dark shadows and gold light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0SYHB-z_kv827sqkA38j69royyDwn2ZSjMpPEkSiZt7y3OW8zoRpFdewN-DNChCb-HhTjAHkpRUs7bUm19sVWnK5SnB7po2lBnVT5HxkXIuOwgHl1kdIimqnZ_43O_iVMg4LyjUIKQQ5_h-nN5Mj324pO01GGuwBdn_9MC8ZyR_u96HCen6oDp_zgMMnE-wpZr0pRsSesZ_NHuWEzIQ3SQumiEbRpbKk3aLPJsCgnVhUlbF57IZXUht5lqGqPc7wP4YOo1bzdOy0"/>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-secondary mb-2">Molecular Craft</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                        Our proprietary filtration process retains the vital minerals that give BOOND its signature crisp finish.
+                    </p>
+</div>
+</div>
+<!-- Bento Card 3: Wide Layout -->
+<div class="md:col-span-12 glass-card p-12 flex flex-col md:flex-row items-center gap-12">
+<div class="flex-1 space-y-6">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">The Essence of Luxury</h2>
+<div class="gold-thread w-24"></div>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                        Whether it's a midnight gala or an intimate gathering, BOOND elevates the hydration experience into a ceremonial act of purity. Designed for those who demand excellence in every drop.
+                    </p>
+<a class="inline-flex items-center gap-2 text-secondary font-label-sm text-label-sm uppercase tracking-widest border-b-2 border-secondary pb-1 hover:text-secondary-fixed hover:border-secondary-fixed transition-colors" href="#">
+                        Explore the Collection
+                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="flex-1 grid grid-cols-2 gap-4">
+<img class="w-full h-48 object-cover rounded-xl" data-alt="A close-up shot of a high-end luxury dinner table setting at night. Crystal glassware is illuminated by candlelight, and a bottle of BOOND sits elegantly in the center. The background is blurred with golden bokeh lights, creating a warm, festive, and exclusive atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdnpaNFkhfbzIamwPDVCGB_y_YBU9kwyInIu9mmVxlJqqp7_JDd0wIIJv2apmfTPUeTdIv8bJYWRE4FamCEaz2I33hl-u9Zbv-sNr_8rHLovoCv3Tido-BqRwkoG5JKW09Y-Q_ZnUShWAJaFmSBnUG4Opz2yg45PlfbvA8--3wnDQkwjvNfYl9xdeHnk6vEpgOnkEZZRfSFQ0fvHrWpDsOaFQXGviUkDhPpOHbt5k3RElkbObL7qayx3JCeQXzNUalbMv6LpbHcVs"/>
+<img class="w-full h-48 object-cover rounded-xl" data-alt="Clean, abstract art piece showing the refraction of light through a glass of water. Prismatic colors dance across a dark navy surface. The style is ultra-modern and artistic, focusing on the physics of light and the clarity of water." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTjWLBh9AJdDMNYQQCbJFi9ubqVTqqShN5fJpvngD0dTJ39ZKiYRoRB1Hf0csAVWQ4ZaJof04Fgb7HqmxcWjP1NG6gSTV-RvNhd7LUR9Sd1YPdksnADuLpH5AsxubJWGI_PUbVD6odMmlQ7VTbvLi0izxjqEJ98tM86WljctCCgTqBae_HFmklxoOhe9JkxutbC85b3Y5ODT7yjq6hBZ99aeBbBfEhgvYO_LY_m36taZDhQlnUvkVf9HPWdBSJMaan8-K2wLYATCY"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest border-t border-secondary/30 w-full py-section-gap px-margin-desktop">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter items-start max-w-container-max mx-auto">
+<div class="space-y-6">
+<div class="font-headline-md text-headline-md text-secondary-fixed">BOOND</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xs">
+                    Redefining hydration as a luxury experience, crafted through ancestral wisdom and modern precision.
+                </p>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-2">Navigation</h4>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors duration-300" href="#">Privacy Policy</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors duration-300" href="#">Terms of Service</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors duration-300" href="#">Shipping</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors duration-300" href="#">Contact Us</a>
+</div>
+<div class="space-y-6">
+<h4 class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-2">Connect</h4>
+<div class="flex gap-6">
+<span class="material-symbols-outlined text-on-surface-variant hover:text-secondary cursor-pointer transition-colors">public</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-secondary cursor-pointer transition-colors">chat_bubble</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-secondary cursor-pointer transition-colors">mail</span>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant pt-8">
+                    © 2024 BOOND. The Essence of Purity.
+                </p>
+</div>
+</div>
+</footer>
+</body></html>

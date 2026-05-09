@@ -1,0 +1,12 @@
+{
+  "name": "boond-luxury",
+  "version": "1.0.0",
+  "description": "Premium Luxury Water Experience",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve ."
+  },
+  "devDependencies": {
+    "serve": "^14.2.3"
+  }
+}

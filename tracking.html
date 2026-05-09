@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>BOOND - Track Your Order</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+    <style>
+        body {
+            background-color: #091325;
+            color: #d9e2fb;
+            font-family: 'Manrope', sans-serif;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        .font-headline-md { font-family: 'EB Garamond', serif; }
+        .font-display-lg { font-family: 'EB Garamond', serif; }
+        .font-headline-lg { font-family: 'EB Garamond', serif; }
+        .font-label-sm { font-family: 'Manrope', sans-serif; }
+        .font-body-md { font-family: 'Manrope', sans-serif; }
+        .font-body-lg { font-family: 'Manrope', sans-serif; }
+
+        .glass-card {
+            backdrop-filter: blur(24px);
+            background: rgba(10, 22, 40, 0.7);
+            border-top: 1px solid rgba(201, 168, 76, 0.3);
+            border-left: 1px solid rgba(201, 168, 76, 0.1);
+        }
+        .gold-glow {
+            text-shadow: 0 0 20px rgba(201, 168, 76, 0.5);
+        }
+        
+        .ambient-glow { background: radial-gradient(circle at center, rgba(201, 168, 76, 0.1) 0%, transparent 70%); }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                "outline-variant": "#45474c",
+                "secondary-fixed": "#ffe08f",
+                "primary": "#bbc7df",
+                "on-surface-variant": "#c5c6cd",
+                "on-secondary": "#3d2e00",
+                "tertiary-container": "#141616",
+                "inverse-on-surface": "#273143",
+                "outline": "#8f9097",
+                "on-primary": "#253144",
+                "on-error-container": "#ffdad6",
+                "on-primary-fixed": "#101c2e",
+                "tertiary-fixed-dim": "#c6c6c7",
+                "on-secondary-fixed-variant": "#584400",
+                "surface-variant": "#2b3548",
+                "inverse-primary": "#535f74",
+                "on-tertiary-fixed-variant": "#454747",
+                "surface-container-low": "#111c2d",
+                "on-primary-container": "#758096",
+                "secondary-fixed-dim": "#e6c364",
+                "secondary": "#e6c364",
+                "on-primary-fixed-variant": "#3c475b",
+                "on-secondary-fixed": "#241a00",
+                "surface-container-lowest": "#040e1f",
+                "surface-tint": "#bbc7df",
+                "secondary-container": "#785d00",
+                "surface-container-high": "#202a3c",
+                "on-background": "#d9e2fb",
+                "on-surface": "#d9e2fb",
+                "primary-fixed-dim": "#bbc7df",
+                "primary-fixed": "#d7e3fc",
+                "inverse-surface": "#d9e2fb",
+                "tertiary": "#c6c6c7",
+                "surface": "#091325",
+                "error": "#ffb4ab",
+                "surface-container": "#162031",
+                "surface-bright": "#2f394c",
+                "on-tertiary-container": "#7e8080",
+                "on-secondary-container": "#fdd977",
+                "background": "#091325",
+                "on-tertiary-fixed": "#1a1c1c",
+                "primary-container": "#0a1628",
+                "surface-container-highest": "#2b3548",
+                "surface-dim": "#091325",
+                "error-container": "#93000a",
+                "on-tertiary": "#2f3131",
+                "on-error": "#690005",
+                "tertiary-fixed": "#e2e2e2"
+              },
+              "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+              },
+              "spacing": {
+                "margin-desktop": "80px",
+                "section-gap": "120px",
+                "margin-mobile": "20px",
+                "container-max": "1280px",
+                "gutter": "24px",
+                "unit": "8px"
+              },
+              "fontFamily": {
+                "headline-md": ["EB Garamond"],
+                "display-lg": ["EB Garamond"],
+                "body-lg": ["Manrope"],
+                "headline-lg": ["EB Garamond"],
+                "label-sm": ["Manrope"],
+                "headline-lg-mobile": ["EB Garamond"],
+                "body-md": ["Manrope"]
+              },
+              "fontSize": {
+                "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "400"}],
+                "display-lg": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "500"}],
+                "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                "headline-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                "headline-lg-mobile": ["36px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+              }
+            }
+          }
+        }
+    </script>
+</head>
+<body class="bg-background selection:bg-secondary/30">
+
+    <!-- Top Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-surface/70 backdrop-blur-3xl border-b border-secondary/20 shadow-2xl">
+        <div class="flex justify-between items-center px-margin-desktop py-6 max-w-container-max mx-auto">
+            <a href="index.html" class="font-headline-lg text-headline-lg tracking-widest text-on-surface uppercase hover:text-secondary transition-colors">BOOND</a>
+            <div class="hidden md:flex gap-gutter items-center">
+                <a class="text-on-surface-variant hover:text-secondary-fixed transition-colors font-body-md duration-300" href="shop.html">Shop</a>
+                <a class="text-on-surface-variant hover:text-secondary-fixed transition-colors font-body-md duration-300" href="customizer.html">Customizer</a>
+                <a class="text-on-surface-variant hover:text-secondary-fixed transition-colors font-body-md duration-300" href="heritage.html">Heritage</a>
+                <a class="text-secondary border-b-2 border-secondary pb-1 font-body-md" href="tracking.html">Track Order</a>
+            </div>
+            <a href="customizer.html" class="border border-secondary px-8 py-2 text-on-surface hover:bg-secondary/10 active:scale-95 duration-200 transition-all font-label-sm uppercase tracking-widest block text-center">Order Now</a>
+        </div>
+    </nav>
+
+    <main class="pt-48 pb-16 min-h-screen">
+        <!-- Live Order Tracking Section -->
+        <div class="flex flex-col mb-16 space-y-4 max-w-container-max mx-auto px-margin-desktop relative z-20">
+            <span class="font-label-sm text-label-sm uppercase tracking-[0.3em] text-secondary">Securing Your Essence</span>
+            <h1 id="unique-order-id" class="font-display-lg text-display-lg text-primary max-md:text-headline-lg-mobile">
+                BND-9928-XA
+            </h1>
+            <div class="h-[0.5px] w-32 bg-secondary"></div>
+        </div>
+
+        <!-- Order Journey Timeline -->
+        <section class="mb-section-gap relative max-w-container-max mx-auto px-margin-desktop z-20">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+                <div class="hidden md:block absolute top-10 left-0 w-full h-[1px] bg-secondary/10 -z-10">
+                    <div class="h-full bg-secondary w-3/4"></div>
+                </div>
+                <div class="flex md:flex-col items-center md:items-start space-x-6 md:space-x-0 md:space-y-4">
+                    <div class="w-20 h-20 rounded-full glass-card flex items-center justify-center border-secondary ring-4 ring-secondary/5">
+                        <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                    </div>
+                    <div>
+                        <h3 class="font-headline-md text-headline-md text-primary text-[24px]">Order Received</h3>
+                        <p id="order-received-time" class="font-label-sm text-label-sm text-secondary/60 mt-1">OCT 24, 2023 • 09:41 AM</p>
+                    </div>
+                </div>
+                <div class="flex md:flex-col items-center md:items-start space-x-6 md:space-x-0 md:space-y-4">
+                    <div class="w-20 h-20 rounded-full glass-card flex items-center justify-center border-secondary ring-4 ring-secondary/5">
+                        <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">water_drop</span>
+                    </div>
+                    <div>
+                        <h3 class="font-headline-md text-headline-md text-primary text-[24px]">Purification &amp; Bottling</h3>
+                        <p class="font-label-sm text-label-sm text-secondary/60 mt-1">OCT 25, 2023 • 02:15 PM</p>
+                    </div>
+                </div>
+                <div class="flex md:flex-col items-center md:items-start space-x-6 md:space-x-0 md:space-y-4">
+                    <div class="w-20 h-20 rounded-full glass-card flex items-center justify-center border-secondary ring-4 ring-secondary/30 gold-glow">
+                        <span class="material-symbols-outlined text-secondary animate-pulse" style="font-variation-settings: 'FILL' 1;">verified</span>
+                    </div>
+                    <div>
+                        <h3 class="font-headline-md text-headline-md text-secondary text-[24px]">Quality Assurance</h3>
+                        <p class="font-label-sm text-label-sm text-secondary mt-1">IN PROGRESS • SECTOR 7G</p>
+                    </div>
+                </div>
+                <div class="flex md:flex-col items-center md:items-start space-x-6 md:space-x-0 md:space-y-4 opacity-40">
+                    <div class="w-20 h-20 rounded-full glass-card flex items-center justify-center border-secondary/20">
+                        <span class="material-symbols-outlined text-primary">local_shipping</span>
+                    </div>
+                    <div>
+                        <h3 class="font-headline-md text-headline-md text-primary text-[24px]">Final Delivery</h3>
+                        <p id="final-delivery-time" class="font-label-sm text-label-sm text-on-surface-variant mt-1">ESTIMATED OCT 28</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Map & Order Summary Bento -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter max-w-container-max mx-auto px-margin-desktop relative z-20 mb-section-gap">
+            <div class="lg:col-span-8 glass-card rounded-xl overflow-hidden min-h-[500px] relative">
+                <img class="w-full h-full object-cover grayscale opacity-40 mix-blend-luminosity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCfmh0eOVH41o0oppeLmI7jHRzCMzEc8rm3EqSyruTUt_SuitK2HCX9ZNNkQ1QC9IplGxMcoOhd7cfbYvHZRJYMdoUOHJ_diTbG-vjnAb1KAxveWy7tFMkmdIC5nTAjUvWXXnhOLSaobH83mC09KP_1OA57BwlnrYxC1C4XAoZbDNi5IvC8hNqA77CCZ9mLEZq04_kbPuEL5KcufjehFtpRO-TPzXQVBUzNyQx8O9HPaqEUkwCmUMi3uoQb7XDjO6UiXmcnnTlBqM"/>
+                <div class="absolute inset-0 bg-gradient-to-t from-background to-transparent"></div>
+                <div class="absolute top-8 left-8">
+                    <div class="glass-card p-4 rounded-lg border-secondary/30 flex items-center space-x-4">
+                        <div class="w-2 h-2 rounded-full bg-secondary animate-ping"></div>
+                        <span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary">Live: En route to Karachi Hub</span>
+                    </div>
+                </div>
+            </div>
+            
+            <aside class="lg:col-span-4 flex flex-col space-y-gutter">
+                <div class="glass-card p-8 rounded-xl border-t border-secondary">
+                    <span class="font-label-sm text-label-sm text-secondary/60 uppercase">Estimated Arrival</span>
+                    <h2 id="estimated-arrival-date" class="font-display-lg text-[48px] text-primary mt-2">Oct 28</h2>
+                    <p class="font-body-md text-on-surface-variant mt-2">By 6:00 PM • Standard Secure Delivery</p>
+                </div>
+                
+                <div class="glass-card p-8 rounded-xl flex-grow">
+                    <h4 class="font-headline-md text-[24px] text-primary mb-6">Manifest Content</h4>
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-16 h-16 bg-surface-container rounded-lg border border-secondary/10 flex items-center justify-center overflow-hidden">
+                                    <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMTquirHpP1Tk165Ci8POK0EB3EzdiUeWXg8nUE2ppnIVQX7CYHFrcm0XETwcbhD5p7XUZrPn5mzfvcPSG_msn0GdpjVcM9g_fY-VcbcKPVnLP-vCtwaCbraeXbNOM6yohUd2k82CIiNiH6RQ9JcGpXrK0aTs0zyOinXPrElAmWCZ3GcKBxMmSATVjxP_M_Fje0XI-fHbb1dTDNVrfLnHI-FGltGaEbHY0job-aWydLIOFgmQ9oIdh7AVuHYKCY6MLIV8YmLiIFKE"/>
+                                </div>
+                                <div>
+                                    <p class="font-body-md font-bold text-primary">BOOND Reserve</p>
+                                    <p class="font-label-sm text-on-surface-variant">750ml Crystal Edition</p>
+                                </div>
+                            </div>
+                            <span class="font-label-sm text-secondary">x 12</span>
+                        </div>
+                    </div>
+
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- Support Section -->
+    <section class="bg-surface-container-low py-24 border-t border-secondary/10 relative z-20">
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <div class="flex flex-col space-y-4">
+                    <span class="material-symbols-outlined text-secondary text-4xl">support_agent</span>
+                    <h5 class="font-headline-md text-primary">Personal Concierge</h5>
+                    <p class="text-on-surface-variant">Our purity advisors are available 24/7 to assist with your journey or provide tasting notes.</p>
+                    <a class="font-label-sm text-secondary uppercase tracking-widest border-b border-secondary w-fit pb-1" href="#">Connect Now</a>
+                </div>
+                <div class="flex flex-col space-y-4">
+                    <span class="material-symbols-outlined text-secondary text-4xl">shield_moon</span>
+                    <h5 class="font-headline-md text-primary">Secure Transit</h5>
+                    <p class="text-on-surface-variant">Your order is protected by our signature climate-controlled logistics to preserve mineral integrity.</p>
+                    <a class="font-label-sm text-secondary uppercase tracking-widest border-b border-secondary w-fit pb-1" href="#">Our Protocol</a>
+                </div>
+                <div class="flex flex-col space-y-4">
+                    <span class="material-symbols-outlined text-secondary text-4xl">inventory_2</span>
+                    <h5 class="font-headline-md text-primary">Subscription Vault</h5>
+                    <p class="text-on-surface-variant">Never miss a drop. Set up your recurring delivery schedule within the BOOND Vault.</p>
+                    <a class="font-label-sm text-secondary uppercase tracking-widest border-b border-secondary w-fit pb-1" href="#">Manage Vault</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-surface-container-lowest border-t border-secondary/30 w-full py-section-gap px-margin-desktop relative z-20">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter items-start max-w-container-max mx-auto">
+            <div class="space-y-6">
+                <div class="font-headline-md text-headline-md text-secondary-fixed">BOOND</div>
+                <p class="font-body-md text-body-md text-on-surface-variant max-w-xs">
+                    Redefining hydration as a luxury experience, crafted through ancestral wisdom and modern precision.
+                </p>
+            </div>
+            <div class="flex flex-col gap-4">
+                <h4 class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-2">Navigation</h4>
+                <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors duration-300" href="#">Privacy Policy</a>
+                <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors duration-300" href="#">Terms of Service</a>
+                <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors duration-300" href="#">Shipping</a>
+                <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors duration-300" href="#">Contact Us</a>
+            </div>
+            <div class="space-y-6">
+                <h4 class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-2">Connect</h4>
+                <div class="flex gap-6">
+                    <span class="material-symbols-outlined text-on-surface-variant hover:text-secondary cursor-pointer transition-colors">public</span>
+                    <span class="material-symbols-outlined text-on-surface-variant hover:text-secondary cursor-pointer transition-colors">chat_bubble</span>
+                    <span class="material-symbols-outlined text-on-surface-variant hover:text-secondary cursor-pointer transition-colors">mail</span>
+                </div>
+                <p class="font-label-sm text-label-sm text-on-surface-variant pt-8">
+                    © 2024 BOOND. The Essence of Purity.
+                </p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Real-time order tracking logic
+        window.addEventListener('DOMContentLoaded', () => {
+            // Generate/Retrieve Unique Order ID
+            let orderId = localStorage.getItem('boond_last_order_id');
+            if (!orderId) {
+                const randomPart = Math.random().toString(36).substring(2, 6).toUpperCase();
+                const randomEnd = Math.random().toString(36).substring(2, 4).toUpperCase();
+                orderId = `BND-${randomPart}-${randomEnd}`;
+                localStorage.setItem('boond_last_order_id', orderId);
+            }
+            document.getElementById('unique-order-id').innerText = orderId;
+
+            // Handle Timestamps
+            const timestampStr = localStorage.getItem('boond_order_timestamp');
+            const orderDate = timestampStr ? new Date(timestampStr) : new Date();
+            
+            const options = { month: 'SHORT', day: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true };
+            const formattedDate = orderDate.toLocaleString('en-US', options).toUpperCase().replace(',', ' •');
+            document.getElementById('order-received-time').innerText = formattedDate;
+
+            // Final Delivery (Order Date + 5 days)
+            const deliveryDate = new Date(orderDate);
+            deliveryDate.setDate(orderDate.getDate() + 5);
+            const deliveryOptions = { month: 'SHORT', day: '2-digit' };
+            const formattedDelivery = deliveryDate.toLocaleString('en-US', deliveryOptions).toUpperCase();
+            
+            document.getElementById('final-delivery-time').innerText = `ESTIMATED ${formattedDelivery}`;
+            document.getElementById('estimated-arrival-date').innerText = formattedDelivery;
+        });
+    </script>
+</body>
+</html>

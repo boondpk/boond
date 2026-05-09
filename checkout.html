@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>BOOND - Checkout</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+    <style>
+        body {
+            background-color: #091325;
+            color: #d9e2fb;
+            font-family: 'Manrope', sans-serif;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        .font-headline-md { font-family: 'EB Garamond', serif; }
+        .font-display-lg { font-family: 'EB Garamond', serif; }
+        .font-headline-lg { font-family: 'EB Garamond', serif; }
+        .font-label-sm { font-family: 'Manrope', sans-serif; }
+        .font-body-md { font-family: 'Manrope', sans-serif; }
+        .font-body-lg { font-family: 'Manrope', sans-serif; }
+
+        .glass-card {
+            backdrop-filter: blur(24px);
+            background: rgba(10, 22, 40, 0.7);
+            border-top: 1px solid rgba(201, 168, 76, 0.3);
+            border-left: 1px solid rgba(201, 168, 76, 0.1);
+        }
+        
+        .ambient-glow { background: radial-gradient(circle at center, rgba(201, 168, 76, 0.1) 0%, transparent 70%); }
+        .gold-border-gradient {
+            border: 1px solid transparent;
+            border-image: linear-gradient(to bottom, #e6c364, transparent) 1;
+        }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                "outline-variant": "#45474c",
+                "secondary-fixed": "#ffe08f",
+                "primary": "#bbc7df",
+                "on-surface-variant": "#c5c6cd",
+                "on-secondary": "#3d2e00",
+                "tertiary-container": "#141616",
+                "inverse-on-surface": "#273143",
+                "outline": "#8f9097",
+                "on-primary": "#253144",
+                "on-error-container": "#ffdad6",
+                "on-primary-fixed": "#101c2e",
+                "tertiary-fixed-dim": "#c6c6c7",
+                "on-secondary-fixed-variant": "#584400",
+                "surface-variant": "#2b3548",
+                "inverse-primary": "#535f74",
+                "on-tertiary-fixed-variant": "#454747",
+                "surface-container-low": "#111c2d",
+                "on-primary-container": "#758096",
+                "secondary-fixed-dim": "#e6c364",
+                "secondary": "#e6c364",
+                "on-primary-fixed-variant": "#3c475b",
+                "on-secondary-fixed": "#241a00",
+                "surface-container-lowest": "#040e1f",
+                "surface-tint": "#bbc7df",
+                "secondary-container": "#785d00",
+                "surface-container-high": "#202a3c",
+                "on-background": "#d9e2fb",
+                "on-surface": "#d9e2fb",
+                "primary-fixed-dim": "#bbc7df",
+                "primary-fixed": "#d7e3fc",
+                "inverse-surface": "#d9e2fb",
+                "tertiary": "#c6c6c7",
+                "surface": "#091325",
+                "error": "#ffb4ab",
+                "surface-container": "#162031",
+                "surface-bright": "#2f394c",
+                "on-tertiary-container": "#7e8080",
+                "on-secondary-container": "#fdd977",
+                "background": "#091325",
+                "on-tertiary-fixed": "#1a1c1c",
+                "primary-container": "#0a1628",
+                "surface-container-highest": "#2b3548",
+                "surface-dim": "#091325",
+                "error-container": "#93000a",
+                "on-tertiary": "#2f3131",
+                "on-error": "#690005",
+                "tertiary-fixed": "#e2e2e2"
+              },
+              "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+              },
+              "spacing": {
+                "margin-desktop": "80px",
+                "section-gap": "120px",
+                "margin-mobile": "20px",
+                "container-max": "1280px",
+                "gutter": "24px",
+                "unit": "8px"
+              },
+              "fontFamily": {
+                "headline-md": ["EB Garamond"],
+                "display-lg": ["EB Garamond"],
+                "body-lg": ["Manrope"],
+                "headline-lg": ["EB Garamond"],
+                "label-sm": ["Manrope"],
+                "headline-lg-mobile": ["EB Garamond"],
+                "body-md": ["Manrope"]
+              },
+              "fontSize": {
+                "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "400"}],
+                "display-lg": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "500"}],
+                "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                "headline-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                "headline-lg-mobile": ["36px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+              }
+            }
+          }
+        }
+    </script>
+</head>
+<body class="bg-background selection:bg-secondary/30">
+
+    <!-- Top Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-surface/70 backdrop-blur-3xl border-b border-secondary/20 shadow-2xl">
+        <div class="flex justify-between items-center px-margin-desktop py-6 max-w-container-max mx-auto">
+            <a href="index.html" class="font-headline-lg text-headline-lg tracking-widest text-on-surface uppercase hover:text-secondary transition-colors">BOOND</a>
+            <div class="hidden md:flex gap-gutter items-center">
+                <a class="text-on-surface-variant hover:text-secondary-fixed transition-colors font-body-md duration-300" href="shop.html">Shop</a>
+                <a class="text-on-surface-variant hover:text-secondary-fixed transition-colors font-body-md duration-300" href="customizer.html">Customizer</a>
+                <a class="text-on-surface-variant hover:text-secondary-fixed transition-colors font-body-md duration-300" href="heritage.html">Heritage</a>
+                <a class="text-on-surface-variant hover:text-secondary-fixed transition-colors font-body-md duration-300" href="tracking.html">Track Order</a>
+            </div>
+            <a href="customizer.html" class="border border-secondary px-8 py-2 text-on-surface bg-secondary/10 active:scale-95 duration-200 transition-all font-label-sm uppercase tracking-widest block text-center">Order Now</a>
+        </div>
+    </nav>
+
+    <main class="pt-48 pb-16 min-h-screen">
+        <!-- Order Form Section -->
+        <div class="mb-16 max-w-container-max mx-auto px-margin-desktop relative z-20">
+            <h1 class="font-headline-lg text-headline-lg text-on-surface mb-4">Complete Your Essence</h1>
+            <div class="h-px w-24 bg-secondary"></div>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter items-start max-w-container-max mx-auto px-margin-desktop relative z-20 mb-section-gap">
+            <!-- Left Side: Contact Information Form -->
+            <section class="glass-card p-10 gold-border-gradient relative">
+                <div class="absolute -top-10 -left-10 w-40 h-40 ambient-glow pointer-events-none"></div>
+                <h2 class="font-headline-md text-headline-md text-secondary-fixed mb-8">Delivery Details</h2>
+                <form action="https://formspree.io/f/mojrkzln" method="POST" class="space-y-10" id="order-form">
+                    <!-- Hidden Order Details -->
+                    <input type="hidden" name="_next" value="tracking.html">
+                    <input type="hidden" name="Product Size" id="hidden-size">
+                    <input type="hidden" name="Unit Price" id="hidden-price">
+                    <input type="hidden" name="Quantity" id="hidden-qty">
+                    <input type="hidden" name="Engraving Text" id="hidden-engraving">
+                    <input type="hidden" name="Branding Logo (Base64)" id="hidden-logo">
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                        <div class="relative group">
+                            <input class="peer block w-full bg-transparent border-0 border-b border-outline-variant py-3 px-0 text-on-surface focus:ring-0 focus:border-secondary transition-all placeholder-transparent" id="name" name="Full Name" placeholder=" " required="" type="text"/>
+                            <label class="absolute left-0 top-3 text-on-surface-variant text-body-md transition-all duration-300 peer-placeholder-shown:text-body-md peer-placeholder-shown:top-3 peer-focus:-top-4 peer-focus:text-label-sm peer-focus:text-secondary uppercase tracking-widest" for="name">Full Name *</label>
+                        </div>
+                        <div class="relative group">
+                            <input class="peer block w-full bg-transparent border-0 border-b border-outline-variant py-3 px-0 text-on-surface focus:ring-0 focus:border-secondary transition-all placeholder-transparent" id="phone" name="Phone Number" placeholder=" " required="" type="tel"/>
+                            <label class="absolute left-0 top-3 text-on-surface-variant text-body-md transition-all duration-300 peer-placeholder-shown:text-body-md peer-placeholder-shown:top-3 peer-focus:-top-4 peer-focus:text-label-sm peer-focus:text-secondary uppercase tracking-widest" for="phone">Phone Number *</label>
+                        </div>
+                    </div>
+                    <div class="relative group">
+                        <input class="peer block w-full bg-transparent border-0 border-b border-outline-variant py-3 px-0 text-on-surface focus:ring-0 focus:border-secondary transition-all placeholder-transparent" id="city" name="Delivery Area" placeholder=" " required="" type="text"/>
+                        <label class="absolute left-0 top-3 text-on-surface-variant text-body-md transition-all duration-300 peer-placeholder-shown:text-body-md peer-placeholder-shown:top-3 peer-focus:-top-4 peer-focus:text-label-sm peer-focus:text-secondary uppercase tracking-widest" for="city">Delivery Area / City *</label>
+                    </div>
+                    <div class="pt-8">
+                        <button class="w-full py-6 bg-secondary text-on-secondary font-label-sm text-label-sm uppercase tracking-[0.25em] font-bold shadow-[0_10px_40px_-10px_rgba(230,195,100,0.4)] hover:shadow-[0_15px_50px_-5px_rgba(230,195,100,0.6)] active:scale-95 transition-all duration-300" type="submit">
+                            Place Luxury Order
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Right Side: Customization Preview -->
+            <aside class="space-y-gutter">
+                <div class="glass-card p-8 border border-white/5 relative overflow-hidden group">
+                    <div class="absolute inset-0 ambient-glow opacity-50 group-hover:opacity-80 transition-opacity"></div>
+                    <h3 class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-6 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[16px]">verified</span> Custom Design Preview
+                    </h3>
+                    <div class="relative flex justify-center items-center py-10">
+                        <div class="relative w-48 h-80">
+                            <img alt="BOOND Bottle" class="w-full h-full object-contain mix-blend-screen opacity-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxOBIGXpCEG9EbGnxIiO2nTaFdwdnbn3RrT_ZfHIeRVS6b6q-3MTg9l9hSC-LILyfr4MTTX8wm-rJrvpPiPuu04rqlHIPZdCrGhKP-q5Uo_8mymrO9niyJY4O4-mNN1CyvDWmw-PLzXIVkI7W3NDrzUC-W20IIiTzoWvQPh9BvbAeCVgDJBJ7VDfRmJTJf_FnlFEFNsGLFBIyR-diTimjugXR7YTBlc3ic_7QSrEdKKz8p-sKTitr_wlo2emYVoflxBNQONodcmow"/>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center pt-20">
+                                <div class="w-20 h-20 border border-secondary/40 rounded-full flex items-center justify-center backdrop-blur-md">
+                                    <span class="material-symbols-outlined text-secondary text-4xl" data-weight="fill">water_drop</span>
+                                </div>
+                                <p class="mt-4 text-label-sm text-secondary uppercase tracking-[0.2em] font-semibold">Your Identity</p>
+                            </div>
+                        </div>
+                        <div class="absolute right-0 top-1/2 -translate-y-1/2 space-y-4">
+                            <div class="glass-card p-3 border border-secondary/20">
+                                <p class="text-[10px] text-on-surface-variant uppercase">Etching</p>
+                                <p class="text-label-sm text-secondary font-bold">24K Gold Foil</p>
+                            </div>
+                            <div class="glass-card p-3 border border-secondary/20">
+                                <p class="text-[10px] text-on-surface-variant uppercase">Texture</p>
+                                <p class="text-label-sm text-secondary font-bold">Sand-Blasted</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex gap-6 p-4">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-secondary">verified</span>
+                        <span class="text-label-sm uppercase tracking-wider text-on-surface-variant">Laboratory Tested</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-secondary">eco</span>
+                        <span class="text-label-sm uppercase tracking-wider text-on-surface-variant">Sustainable Glass</span>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-surface-container-lowest border-t border-secondary/30 w-full py-section-gap px-margin-desktop relative z-20">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter items-start max-w-container-max mx-auto">
+            <div class="space-y-6">
+                <div class="font-headline-md text-headline-md text-secondary-fixed">BOOND</div>
+                <p class="font-body-md text-body-md text-on-surface-variant max-w-xs">
+                    Redefining hydration as a luxury experience, crafted through ancestral wisdom and modern precision.
+                </p>
+            </div>
+            <div class="flex flex-col gap-4">
+                <h4 class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-2">Navigation</h4>
+                <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors duration-300" href="#">Privacy Policy</a>
+                <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors duration-300" href="#">Terms of Service</a>
+                <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors duration-300" href="#">Shipping</a>
+                <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors duration-300" href="#">Contact Us</a>
+            </div>
+            <div class="space-y-6">
+                <h4 class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-2">Connect</h4>
+                <div class="flex gap-6">
+                    <span class="material-symbols-outlined text-on-surface-variant hover:text-secondary cursor-pointer transition-colors">public</span>
+                    <span class="material-symbols-outlined text-on-surface-variant hover:text-secondary cursor-pointer transition-colors">chat_bubble</span>
+                    <span class="material-symbols-outlined text-on-surface-variant hover:text-secondary cursor-pointer transition-colors">mail</span>
+                </div>
+                <p class="font-label-sm text-label-sm text-on-surface-variant pt-8">
+                    © 2024 BOOND. The Essence of Purity.
+                </p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Load configuration and prepare Formspree fields
+        window.addEventListener('DOMContentLoaded', () => {
+            const configRaw = localStorage.getItem('boond_config');
+            if (configRaw) {
+                const config = JSON.parse(configRaw);
+                document.getElementById('hidden-size').value = config.size;
+                document.getElementById('hidden-price').value = `Rs. ${config.price}`;
+                document.getElementById('hidden-qty').value = config.qty;
+                document.getElementById('hidden-engraving').value = config.engraving;
+                document.getElementById('hidden-logo').value = config.logo; // This will be the Base64 string
+
+                // Also update the UI preview if applicable
+                if (config.engraving) {
+                    document.querySelector('.text-label-sm.text-secondary.font-bold').innerText = config.engraving;
+                }
+            }
+
+            // Capture order time for tracking page later
+            const form = document.getElementById('order-form');
+            form.addEventListener('submit', () => {
+                localStorage.setItem('boond_order_timestamp', new Date().toISOString());
+            });
+        });
+    </script>
+</body>
+</html>
