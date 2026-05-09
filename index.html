@@ -295,47 +295,60 @@
         const loading = document.getElementById("loading");
 
         const frameCount = 240;
+        const initialPreloadCount = 30;
+        const images = [];
+        let loadedImagesCount = 0;
+        let currentFrameIdx = 0;
+
         const currentFrame = index => (
             `ezgif-frame-${(index + 1).toString().padStart(3, '0')}.jpg`
         );
 
-        const images = [];
-        let loadedImages = 0;
-        
-        // Preload images
-        for (let i = 0; i < frameCount; i++) {
+        function preloadInitialFrames() {
+            for (let i = 0; i < initialPreloadCount; i++) {
+                loadFrame(i, true);
+            }
+        }
+
+        function loadFrame(index, isInitial = false) {
+            if (images[index]) return;
+
             const img = new Image();
-            img.src = currentFrame(i);
+            img.src = currentFrame(index);
             img.onload = () => {
-                loadedImages++;
-                loading.innerText = `Loading frames... ${Math.round((loadedImages / frameCount) * 100)}%`;
-                if (loadedImages === frameCount) {
-                    loading.style.display = 'none';
-                    init();
+                images[index] = img;
+                if (isInitial) {
+                    loadedImagesCount++;
+                    loading.innerText = `Loading frames... ${Math.round((loadedImagesCount / initialPreloadCount) * 100)}%`;
+                    if (loadedImagesCount === initialPreloadCount) {
+                        loading.style.display = 'none';
+                        init();
+                    }
+                } else if (index === currentFrameIdx) {
+                    updateImage(index);
                 }
             };
             img.onerror = () => {
-                loadedImages++;
-                if (loadedImages === frameCount) {
-                    loading.style.display = 'none';
-                    init();
+                if (isInitial) {
+                    loadedImagesCount++;
+                    if (loadedImagesCount === initialPreloadCount) {
+                        loading.style.display = 'none';
+                        init();
+                    }
                 }
             };
-            images.push(img);
         }
 
         function init() {
             if (images[0]) {
                 canvas.width = images[0].width;
                 canvas.height = images[0].height;
-                context.drawImage(images[0], 0, 0);
+                updateImage(0);
             }
 
             window.addEventListener('scroll', () => {  
                 const rect = scrollSection.getBoundingClientRect();
                 const sectionTop = rect.top;
-                
-                // maxScroll is the total scrollable distance within the section
                 const maxScroll = rect.height - window.innerHeight;
                 
                 let scrollFraction = 0;
@@ -345,12 +358,19 @@
                 
                 scrollFraction = Math.max(0, Math.min(1, scrollFraction));
                 
-                let frameIndex = Math.min(
+                const frameIndex = Math.min(
                     frameCount - 1,
                     Math.floor(scrollFraction * frameCount)
                 );
                 
-                requestAnimationFrame(() => updateImage(frameIndex));
+                if (frameIndex !== currentFrameIdx) {
+                    currentFrameIdx = frameIndex;
+                    if (!images[frameIndex]) {
+                        loadFrame(frameIndex);
+                    } else {
+                        requestAnimationFrame(() => updateImage(frameIndex));
+                    }
+                }
             });
         }
 
@@ -360,6 +380,8 @@
                 context.drawImage(images[index], 0, 0);
             }
         }
+
+        preloadInitialFrames();
     </script>
 </body>
 </html>
